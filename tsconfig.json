@@ -1,0 +1,39 @@
+{
+    "compilerOptions": {
+        "target": "es6",
+        "module": "commonjs",
+        "emitDecoratorMetadata": true,
+        "experimentalDecorators": true,
+        "removeComments": false,
+        "noImplicitAny": true,
+        "suppressImplicitAnyIndexErrors": true,
+        "declaration": true,
+        "sourceRoot": "./",
+        "rootDir": "./",
+        "sourceMap": true
+    },
+    "files": [
+        "index.ts"
+    ],
+    "compileOnSave": true,
+    "exclude": [
+        "node_modules",
+        "typings"
+    ],
+    "bundles": {
+        "app": {
+            "files": [ "index.ts" ]
+        },
+        "components": {
+            "files": [
+                "page.ts",
+                "plugin.ts"
+            ],
+            "config": {
+                "declaration": true,
+                "outDir": "./bundles",
+                "minify": true  
+            }
+        }
+    }
+}
