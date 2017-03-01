@@ -2,7 +2,8 @@
 import { Routes, RouterModule } from '@angular/router';
 import { AuthService } from './oidc.service';
 import { HttpClientService } from './httpclient.service';
-import {SecurityComponent} from './security.component';
+import { SecurityComponent } from './security.component';
+import { SecurityConstants } from './security.constants'
 
 @NgModule({
     imports:[
@@ -15,7 +16,8 @@ import {SecurityComponent} from './security.component';
     ],
     providers: [
          AuthService,
-         HttpClientService
+         HttpClientService,
+         SecurityConstants
     ]
 })
 

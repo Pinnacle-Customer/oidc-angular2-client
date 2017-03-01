@@ -11,6 +11,7 @@ const router_1 = require("@angular/router");
 const oidc_service_1 = require("./oidc.service");
 const httpclient_service_1 = require("./httpclient.service");
 const security_component_1 = require("./security.component");
+const security_constants_1 = require("./security.constants");
 let SecurityModule = class SecurityModule {
 };
 SecurityModule = __decorate([
@@ -25,7 +26,8 @@ SecurityModule = __decorate([
         ],
         providers: [
             oidc_service_1.AuthService,
-            httpclient_service_1.HttpClientService
+            httpclient_service_1.HttpClientService,
+            security_constants_1.SecurityConstants
         ]
     })
 ], SecurityModule);

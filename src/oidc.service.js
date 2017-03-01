@@ -13,10 +13,12 @@ const core_1 = require("@angular/core");
 const router_1 = require("@angular/router");
 const http_1 = require("@angular/http");
 const Rx_1 = require("rxjs/Rx");
+const security_constants_1 = require("./security.constants");
 let AuthService = class AuthService {
-    constructor(router, http) {
+    constructor(router, http, securityConstants) {
         this.router = router;
         this.http = http;
+        this.securityConstants = securityConstants;
         this.headers = new http_1.Headers({ 'Accept': 'application/json', 'Content-Type': 'application/json' });
         this.options = new http_1.RequestOptions({ headers: this.headers });
         this.storage = sessionStorage;
@@ -79,40 +81,49 @@ let AuthService = class AuthService {
                 resolve(this.mgr);
                 return;
             }
-            this.http.get('oauthconfig.json', this.options)
-                .map((response) => response.json())
-                .catch((error) => {
-                console.error(error);
-                return Rx_1.Observable.throw(error.json().error || 'Server Error');
-            })
+            this.getConfigFile()
                 .subscribe((data) => {
-                console.log(data);
                 this.mgr = new Oidc.UserManager(data);
                 resolve(this.mgr);
             });
         });
     }
     runSilentTokenRenew() {
-        const timer = Rx_1.Observable.timer(1000, 10000);
-        timer.subscribe(t => {
-            const expiresIn = this.getTokenExpiresInSeconds();
-            if (expiresIn) {
-                console.log(`Expires in: ${expiresIn}`);
-                if (expiresIn < 90) {
-                    this.getOidcManager()
-                        .then((res) => {
-                        res.signinSilent().then((user) => {
-                            console.log(user);
-                            sessionStorage.setItem('userData', JSON.stringify(user));
-                        }).catch((err) => {
-                            console.log(err);
+        this.getConfigFile()
+            .subscribe((data) => {
+            if (!data.automaticSilentRenew) {
+                console.log('Silient renew not configured');
+                return;
+            }
+            const timer = Rx_1.Observable.timer(this.securityConstants.SilentTokenStartAfter, this.securityConstants.SilentTokenIntervals);
+            timer.subscribe(t => {
+                const expiresIn = this.getTokenExpiresInSeconds();
+                if (expiresIn) {
+                    console.log(`Expires in: ${expiresIn}`);
+                    if (expiresIn < this.securityConstants.TokenRenewBeforeSeconds) {
+                        this.getOidcManager()
+                            .then((res) => {
+                            res.signinSilent().then((user) => {
+                                console.log(user);
+                                sessionStorage.setItem('userData', JSON.stringify(user));
+                            }).catch((err) => {
+                                console.log(err);
+                            });
                         });
-                    });
+                    }
                 }
-            }
-            else {
-                console.log('no user');
-            }
+                else {
+                    console.log('no user');
+                }
+            });
+        });
+    }
+    getConfigFile() {
+        return this.http.get('oauthconfig.json', this.options)
+            .map((response) => response.json())
+            .catch((error) => {
+            console.error(error);
+            return Rx_1.Observable.throw(error.json().error || 'Server Error');
         });
     }
     store(key, value) {
@@ -128,7 +139,7 @@ let AuthService = class AuthService {
 };
 AuthService = __decorate([
     core_1.Injectable(),
-    __metadata("design:paramtypes", [router_1.Router, http_1.Http])
+    __metadata("design:paramtypes", [router_1.Router, http_1.Http, security_constants_1.SecurityConstants])
 ], AuthService);
 exports.AuthService = AuthService;
 //# sourceMappingURL=oidc.service.js.map
