@@ -17,7 +17,6 @@ let SecurityComponent = class SecurityComponent {
     }
     ngOnInit() {
         if (window.location.hash) {
-            console.log('ngOnInit _securityService.AuthorizedCallback');
             this.authService.signinRedirectCallback();
         }
     }

@@ -31,7 +31,6 @@ let AuthService = class AuthService {
         return this.retrieve('userData') === '' ? '' : this.retrieve('userData').profile.name;
     }
     getAccessToken() {
-        console.log(this.retrieve('userData'));
         return this.retrieve('userData') === '' ? '' : this.retrieve('userData').access_token;
     }
     getTokenExpiresInSeconds() {
@@ -92,7 +91,7 @@ let AuthService = class AuthService {
         this.getConfigFile()
             .subscribe((data) => {
             if (!data.automaticSilentRenew) {
-                console.log('Silient renew not configured');
+                console.log('Silent renew not configured');
                 return;
             }
             const timer = Rx_1.Observable.timer(this.securityConstants.SilentTokenStartAfter, this.securityConstants.SilentTokenIntervals);
