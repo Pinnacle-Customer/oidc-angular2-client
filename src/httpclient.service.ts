@@ -56,6 +56,6 @@ export class HttpClientService {
   private handleError(error: Response) {
         console.error(error);
         if (error.status === 401) { this.authService.clearUserData(); }
-        return Observable.throw(error.json().error || 'Server error');
+        return Observable.throw(error);
   }
 }

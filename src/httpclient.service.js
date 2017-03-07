@@ -61,7 +61,7 @@ let HttpClientService = class HttpClientService {
         if (error.status === 401) {
             this.authService.clearUserData();
         }
-        return Observable_1.Observable.throw(error.json().error || 'Server error');
+        return Observable_1.Observable.throw(error);
     }
 };
 HttpClientService = __decorate([
