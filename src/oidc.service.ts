@@ -26,7 +26,6 @@ export class AuthService {
     }
     
     getAccessToken(): string {
-        console.log(this.retrieve('userData'))
         return this.retrieve('userData') === '' ? '' : this.retrieve('userData').access_token;
     }
 
@@ -94,7 +93,7 @@ export class AuthService {
         this.getConfigFile()
             .subscribe((data) => {
                 if(!data.automaticSilentRenew){
-                    console.log('Silient renew not configured')
+                    console.log('Silent renew not configured')
                     return;
                 }
 

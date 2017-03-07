@@ -12,7 +12,6 @@ export class SecurityComponent implements OnInit{
 
     ngOnInit(): void {
         if (window.location.hash) {
-            console.log('ngOnInit _securityService.AuthorizedCallback');
             this.authService.signinRedirectCallback();
         }
     }
