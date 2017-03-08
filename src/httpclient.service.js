@@ -24,7 +24,6 @@ let HttpClientService = class HttpClientService {
         const token = this.authService.getAccessToken();
         if (token !== '') {
             const tokenValue = `Bearer ${token}`;
-            console.log(`tokenValue:${tokenValue}`);
             headers.append('Authorization', tokenValue);
         }
     }
