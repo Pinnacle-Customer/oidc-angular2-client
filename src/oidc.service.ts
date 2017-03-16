@@ -3,7 +3,7 @@ import { Router } from '@angular/router';
 import { Http, Response, Headers, RequestOptions } from '@angular/http';
 import { Observable } from 'rxjs/Rx';
 import { OidcClient } from 'oidc-client';
-import { SecurityConstants } from './security.constants'
+import { SecurityConstants } from './security.constants';
 
 @Injectable()
 export class AuthService {
@@ -17,11 +17,11 @@ export class AuthService {
         this.runSilentTokenRenew();
     }    
 
-    getUserAuthorized() : boolean {
+    getUserAuthorized(): boolean {
         return this.retrieve('userData') !== '';
     }
     
-    getUserName() : string {
+    getUserName(): string {
         return this.retrieve('userData') === '' ? '' : this.retrieve('userData').profile.name;
     }
     
@@ -92,8 +92,8 @@ export class AuthService {
     private runSilentTokenRenew(): void {
         this.getConfigFile()
             .subscribe((data) => {
-                if(!data.automaticSilentRenew){
-                    console.log('Silent renew not configured')
+                if(!data.automaticSilentRenew) {
+                    console.log('Silent renew not configured');
                     return;
                 }
 
@@ -123,7 +123,7 @@ export class AuthService {
             });
     }
 
-    private getConfigFile(): Observable<any>{
+    private getConfigFile(): Observable<any> {
         return this.http.get('oauthconfig.json', this.options)
             .map((response: Response) => response.json())
             .catch((error: any) => {

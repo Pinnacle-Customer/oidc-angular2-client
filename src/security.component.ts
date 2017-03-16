@@ -6,9 +6,8 @@ import { AuthService } from './oidc.service';
     template: '<div></div>'
 })
 
-export class SecurityComponent implements OnInit{
-    
-    constructor(private authService: AuthService){}
+export class SecurityComponent implements OnInit {
+    constructor(private authService: AuthService) { }
 
     ngOnInit(): void {
         if (window.location.hash) {

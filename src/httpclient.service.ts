@@ -20,7 +20,7 @@ export class HttpClientService {
     }
   }
 
-  get(url : string): Observable<Response> {
+  get(url: string): Observable<Response> {
     const headers = new Headers();
     this.createAuthorizationHeader(headers);
     return this.http.get(url, {
