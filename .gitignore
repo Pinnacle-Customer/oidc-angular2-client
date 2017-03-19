@@ -3,8 +3,10 @@
 /typings/
 /npm-debug.log
 
+*.js.map
+
 /src/*.js
-/src/*.js.map
+/src/*.map
 
 /index.js
 /index.js.map
