@@ -5,6 +5,8 @@ import { HttpClientService } from './httpclient.service';
 import { SecurityComponent } from './security.component';
 import { SecurityConstants } from './security.constants';
 
+import './rxjs-extensions';
+
 @NgModule({
     imports: [
         RouterModule.forChild([

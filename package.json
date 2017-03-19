@@ -10,7 +10,9 @@
     "typings:i": "typings install",
     "********************** TYPESCRIPT **********************": "",
     "tsc": "tsc",
-    "tsc:w": "tsc -w"
+    "tsc:w": "tsc -w",
+    "********************** ROLLUP **********************": "",
+    "rollup": "rollup -c rollup.config.js"
   },
   "repository": {
     "type": "git",

@@ -1,7 +1,7 @@
 ﻿import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { Http, Response, Headers, RequestOptions } from '@angular/http';
-import { Observable } from 'rxjs/Rx';
+import { Observable } from 'rxjs/Observable';
 import { OidcClient } from 'oidc-client';
 import { SecurityConstants } from './security.constants';
 

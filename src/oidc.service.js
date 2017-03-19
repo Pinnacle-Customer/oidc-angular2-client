@@ -12,7 +12,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const core_1 = require("@angular/core");
 const router_1 = require("@angular/router");
 const http_1 = require("@angular/http");
-const Rx_1 = require("rxjs/Rx");
+const Observable_1 = require("rxjs/Observable");
 const security_constants_1 = require("./security.constants");
 let AuthService = class AuthService {
     constructor(router, http, securityConstants) {
@@ -94,7 +94,7 @@ let AuthService = class AuthService {
                 console.log('Silent renew not configured');
                 return;
             }
-            const timer = Rx_1.Observable.timer(this.securityConstants.SilentTokenStartAfter, this.securityConstants.SilentTokenIntervals);
+            const timer = Observable_1.Observable.timer(this.securityConstants.SilentTokenStartAfter, this.securityConstants.SilentTokenIntervals);
             timer.subscribe(t => {
                 const expiresIn = this.getTokenExpiresInSeconds();
                 if (expiresIn) {
@@ -122,7 +122,7 @@ let AuthService = class AuthService {
             .map((response) => response.json())
             .catch((error) => {
             console.error(error);
-            return Rx_1.Observable.throw(error.json().error || 'Server Error');
+            return Observable_1.Observable.throw(error.json().error || 'Server Error');
         });
     }
     store(key, value) {

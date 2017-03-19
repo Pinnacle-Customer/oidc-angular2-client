@@ -2,8 +2,8 @@ import {Injectable} from '@angular/core';
 
 @Injectable()
 export class SecurityConstants {
-    public readonly SilentTokenStartAfter = 1000;
-    public readonly SilentTokenIntervals = 30000;
+    public SilentTokenStartAfter: number = 1000;
+    public SilentTokenIntervals: number = 30000;
     
-    public readonly TokenRenewBeforeSeconds = 90;
+    public TokenRenewBeforeSeconds: number = 90;
 }

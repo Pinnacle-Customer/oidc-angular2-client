@@ -12,6 +12,7 @@ const oidc_service_1 = require("./oidc.service");
 const httpclient_service_1 = require("./httpclient.service");
 const security_component_1 = require("./security.component");
 const security_constants_1 = require("./security.constants");
+require("./rxjs-extensions");
 let SecurityModule = SecurityModule_1 = class SecurityModule {
     static forRoot() {
         return {
